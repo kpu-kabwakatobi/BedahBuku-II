@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Bedah Buku | KPU Kabupaten Wakatobi</title>
 
-    <meta name="description" content="Portal Informasi Kegiatan Bedah Buku KPU Kabupaten Wakatobi">
+    <meta name="description"
+        content="Portal Informasi Kegiatan Bedah Buku KPU Kabupaten Wakatobi">
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -17,313 +29,877 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+
+            font-family: 'Inter', sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5b071b,
+                    #7b1028,
+                    #981b36
+                );
+
             min-height: 100vh;
+
+            color: #333;
+
         }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .page {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            padding: 40px 20px;
+
+        }
+
 
         .container {
-            width: 90%;
+
+            width: 100%;
+
             max-width: 900px;
-            margin: auto;
+
         }
 
-        header {
-            background: #7b0f24;
-            color: white;
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+
             text-align: center;
-            padding: 50px 20px;
+
+            color: white;
+
+            margin-bottom: 35px;
+
         }
+
 
         .logo {
-            width: 100px;
-            height: 100px;
+
+            width: 105px;
+
+            height: 105px;
+
             margin: 0 auto 20px;
-        
+
+            background: white;
+
+            border-radius: 50%;
+
+            padding: 12px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.20);
+
         }
-        
+
+
         .logo img {
+
             width: 100%;
+
             height: 100%;
+
             object-fit: contain;
+
         }
 
-        header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
+
+        .header h1 {
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+
         }
 
-        header p {
+
+        .header .subtitle {
+
             font-size: 16px;
+
             opacity: 0.9;
+
         }
 
-        .content {
-            padding: 40px 0;
+
+        /* =========================================
+           EVENT CARD
+        ========================================= */
+
+        .event-card {
+
+            background: rgba(255,255,255,0.97);
+
+            border-radius: 25px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.20);
+
+            margin-bottom: 25px;
+
         }
+
+
+        .event-label {
+
+            display: inline-block;
+
+            background: #f6e7eb;
+
+            color: #7b1028;
+
+            padding: 7px 15px;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .event-card h2 {
+
+            color: #6e0b22;
+
+            font-size: 25px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .event-description {
+
+            color: #666;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* =========================================
+           EVENT INFORMATION
+        ========================================= */
 
         .event-info {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 30px;
 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
         }
 
-        .event-info h2 {
-            color: #7b0f24;
-            margin-bottom: 10px;
+
+        .info-item {
+
+            background: #fafafa;
+
+            border: 1px solid #eee;
+
+            border-radius: 12px;
+
+            padding: 12px 18px;
+
+            min-width: 150px;
+
         }
 
-        .event-info p {
-            margin: 5px 0;
+
+        .info-item .icon {
+
+            font-size: 20px;
+
+            margin-bottom: 5px;
+
         }
+
+
+        .info-item strong {
+
+            display: block;
+
+            font-size: 13px;
+
+            color: #555;
+
+        }
+
+
+        .info-item span {
+
+            font-size: 12px;
+
+            color: #888;
+
+        }
+
+
+        /* =========================================
+           MENU
+        ========================================= */
 
         .menu {
+
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
         }
+
 
         .menu-item {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 15px;
 
-            text-align: center;
+            background: rgba(255,255,255,0.97);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
             text-decoration: none;
+
             color: #333;
 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: flex;
 
-            transition: 0.3s;
+            align-items: center;
+
+            gap: 18px;
+
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.15);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease;
+
         }
+
 
         .menu-item:hover {
+
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.22);
+
         }
 
-        .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
+
+        .menu-icon {
+
+            width: 60px;
+
+            height: 60px;
+
+            min-width: 60px;
+
+            border-radius: 16px;
+
+            background: #f7e8ec;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 28px;
+
         }
 
-        .menu-item h3 {
-            color: #7b0f24;
-            margin-bottom: 8px;
+
+        .menu-text h3 {
+
+            color: #6e0b22;
+
+            font-size: 16px;
+
+            margin-bottom: 5px;
+
         }
 
-        .menu-item p {
-            font-size: 14px;
-            color: #666;
+
+        .menu-text p {
+
+            color: #777;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
         }
+
+
+        /* =========================================
+           ZOOM BUTTON
+        ========================================= */
 
         .zoom {
+
             grid-column: span 2;
-            background: #7b0f24;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7b1028,
+                    #9c1c3a
+                );
+
             color: white;
+
         }
 
-        .zoom h3 {
-            color: white;
+
+        .zoom .menu-icon {
+
+            background: rgba(255,255,255,0.15);
+
         }
 
-        .zoom p {
-            color: rgba(255,255,255,0.9);
+
+        .zoom .menu-text h3 {
+
+            color: white;
+
+            font-size: 18px;
+
         }
+
+
+        .zoom .menu-text p {
+
+            color: rgba(255,255,255,0.85);
+
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
 
         footer {
+
             text-align: center;
-            padding: 30px 20px;
-            color: #777;
-            font-size: 14px;
+
+            color: rgba(255,255,255,0.75);
+
+            font-size: 12px;
+
+            padding: 30px 10px 10px;
+
+            line-height: 1.7;
+
         }
 
-        @media (max-width: 600px) {
 
-            header h1 {
-                font-size: 26px;
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 650px) {
+
+            .page {
+
+                padding:
+                    30px 15px;
+
             }
+
+
+            .header h1 {
+
+                font-size: 28px;
+
+            }
+
+
+            .header .subtitle {
+
+                font-size: 14px;
+
+            }
+
+
+            .logo {
+
+                width: 90px;
+
+                height: 90px;
+
+            }
+
+
+            .event-card {
+
+                padding: 25px 18px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .event-card h2 {
+
+                font-size: 21px;
+
+            }
+
 
             .menu {
+
                 grid-template-columns: 1fr;
+
             }
 
+
             .zoom {
+
                 grid-column: span 1;
+
+            }
+
+
+            .menu-item {
+
+                padding: 20px;
+
             }
 
         }
+
+
     </style>
+
 </head>
+
 
 <body>
 
-    <!-- HEADER -->
-    <header>
+
+<div class="page">
+
+<div class="container">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="header">
+
 
         <div class="logo">
-            <img src="assets/logo-kpu.png" alt="Logo KPU">
+
+            <img
+                src="assets/logo-kpu.png"
+                alt="Logo KPU">
+
         </div>
 
-        <h1>BEDAH BUKU</h1>
 
-        <p>
+        <h1>
+
+            BEDAH BUKU
+
+        </h1>
+
+
+        <p class="subtitle">
+
             KPU Kabupaten Wakatobi
+
         </p>
+
 
     </header>
 
 
-    <!-- CONTENT -->
-    <main class="content">
 
-        <div class="container">
+    <!-- =====================================
+         EVENT INFORMATION
+    ====================================== -->
 
-            <!-- INFORMASI KEGIATAN -->
-            <section class="event-info">
-
-                <h2>
-                    Portal Kegiatan
-                </h2>
-
-                <p>
-                    Selamat datang di halaman informasi
-                    kegiatan Bedah Buku.
-                </p>
-
-                <p>
-                    <strong>
-                        KPU Kabupaten Wakatobi
-                    </strong>
-                </p>
-
-            </section>
+    <section class="event-card">
 
 
-            <!-- MENU -->
-            <section class="menu">
+        <span class="event-label">
 
-                <!-- ZOOM -->
-                <a href="#" class="menu-item zoom">
+            INFORMASI KEGIATAN
 
-                    <div class="icon">
-                        🎥
-                    </div>
-
-                    <h3>
-                        Link Zoom
-                    </h3>
-
-                    <p>
-                        Klik untuk bergabung dalam kegiatan
-                        melalui Zoom Meeting.
-                    </p>
-
-                </a>
+        </span>
 
 
-                <!-- VIRTUAL BACKGROUND -->
-                <a href="#" class="menu-item">
+        <h2>
 
-                    <div class="icon">
-                        🖥️
-                    </div>
+            Portal Kegiatan Bedah Buku
 
-                    <h3>
-                        Virtual Background
-                    </h3>
-
-                    <p>
-                        Download virtual background
-                        kegiatan.
-                    </p>
-
-                </a>
+        </h2>
 
 
-                <!-- MATERI -->
-                <a href="#" class="menu-item">
+        <p class="event-description">
 
-                    <div class="icon">
-                        📚
-                    </div>
+            Selamat datang di portal informasi kegiatan
+            Bedah Buku KPU Kabupaten Wakatobi.
+            Silakan gunakan menu di bawah untuk
+            mengakses Zoom Meeting, materi,
+            presensi, dan sertifikat kegiatan.
 
-                    <h3>
-                        Materi Bedah Buku
-                    </h3>
-
-                    <p>
-                        Akses materi kegiatan
-                        melalui Google Drive.
-                    </p>
-
-                </a>
+        </p>
 
 
-                <!-- PRESENSI -->
-                <a href="#" class="menu-item">
-
-                    <div class="icon">
-                        📝
-                    </div>
-
-                    <h3>
-                        Presensi
-                    </h3>
-
-                    <p>
-                        Isi daftar hadir kegiatan
-                        Bedah Buku.
-                    </p>
-
-                </a>
+        <div class="event-info">
 
 
-                <!-- SERTIFIKAT -->
-                <a href="#" class="menu-item">
+            <div class="info-item">
 
-                    <div class="icon">
-                        🎓
-                    </div>
+                <div class="icon">
 
-                    <h3>
-                        Sertifikat
-                    </h3>
+                    📅
 
-                    <p>
-                        Akses dan download
-                        sertifikat kegiatan.
-                    </p>
+                </div>
 
-                </a>
+                <strong>
 
-            </section>
+                    Tanggal
+
+                </strong>
+
+                <span>
+
+                    Segera Diisi
+
+                </span>
+
+            </div>
+
+
+
+            <div class="info-item">
+
+                <div class="icon">
+
+                    🕐
+
+                </div>
+
+                <strong>
+
+                    Waktu
+
+                </strong>
+
+                <span>
+
+                    13.30 WITA
+
+                </span>
+
+            </div>
+
+
+
+            <div class="info-item">
+
+                <div class="icon">
+
+                    📍
+
+                </div>
+
+                <strong>
+
+                    Pelaksanaan
+
+                </strong>
+
+                <span>
+
+                    Daring / Zoom
+
+                </span>
+
+            </div>
+
 
         </div>
 
-    </main>
+
+    </section>
 
 
-    <!-- FOOTER -->
+
+    <!-- =====================================
+         MENU
+    ====================================== -->
+
+    <section class="menu">
+
+
+        <!-- ZOOM -->
+
+        <a
+            href="#"
+            class="menu-item zoom">
+
+
+            <div class="menu-icon">
+
+                🎥
+
+            </div>
+
+
+            <div class="menu-text">
+
+                <h3>
+
+                    Gabung Via Zoom
+
+                </h3>
+
+
+                <p>
+
+                    Klik di sini untuk bergabung
+                    ke dalam kegiatan Bedah Buku
+                    melalui Zoom Meeting.
+
+                </p>
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- VIRTUAL BACKGROUND -->
+
+        <a
+            href="#"
+            class="menu-item">
+
+
+            <div class="menu-icon">
+
+                🖥️
+
+            </div>
+
+
+            <div class="menu-text">
+
+                <h3>
+
+                    Virtual Background
+
+                </h3>
+
+
+                <p>
+
+                    Download atau akses
+                    virtual background kegiatan.
+
+                </p>
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- MATERI -->
+
+        <a
+            href="#"
+            class="menu-item">
+
+
+            <div class="menu-icon">
+
+                📚
+
+            </div>
+
+
+            <div class="menu-text">
+
+                <h3>
+
+                    Materi Bedah Buku
+
+                </h3>
+
+
+                <p>
+
+                    Akses materi dan bahan
+                    kegiatan Bedah Buku.
+
+                </p>
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- PRESENSI -->
+
+        <a
+            href="#"
+            class="menu-item">
+
+
+            <div class="menu-icon">
+
+                📝
+
+            </div>
+
+
+            <div class="menu-text">
+
+                <h3>
+
+                    Presensi
+
+                </h3>
+
+
+                <p>
+
+                    Silakan melakukan presensi
+                    kehadiran kegiatan.
+
+                </p>
+
+            </div>
+
+
+        </a>
+
+
+
+        <!-- SERTIFIKAT -->
+
+        <a
+            href="#"
+            class="menu-item">
+
+
+            <div class="menu-icon">
+
+                🎓
+
+            </div>
+
+
+            <div class="menu-text">
+
+                <h3>
+
+                    Sertifikat
+
+                </h3>
+
+
+                <p>
+
+                    Akses halaman sertifikat
+                    kegiatan.
+
+                </p>
+
+            </div>
+
+
+        </a>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
     <footer>
 
-        <p>
-            © 2026 KPU Kabupaten Wakatobi
-        </p>
+        <strong>
 
-        <p>
-            Portal Informasi Kegiatan Bedah Buku
-        </p>
+            KPU KABUPATEN WAKATOBI
+
+        </strong>
+
+        <br>
+
+        Portal Informasi Kegiatan Bedah Buku
+
+        <br>
+
+        © 2026
 
     </footer>
 
+
+</div>
+
+</div>
+
+
 </body>
+
 </html>
