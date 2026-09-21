@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Presensi | Bedah Buku KPU Wakatobi</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    135deg,
+                    #5b0715 0%,
+                    #7d0d20 45%,
+                    #a51632 100%
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            color: #6d0b1c;
+            font-size: 27px;
+            margin-bottom: 7px;
+        }
+
+        .header p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .event-title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #c1122f;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #8f1730;
+            box-shadow: 0 0 0 3px rgba(143,23,48,0.08);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .button {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            background: linear-gradient(
+                135deg,
+                #710b1d,
+                #a51632
+            );
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(113,11,29,0.25);
+        }
+
+        .button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .success {
+            background: #eaf8ef;
+            color: #176b38;
+            border: 1px solid #bce8ca;
+        }
+
+        .error {
+            background: #fff0f1;
+            color: #a51632;
+            border: 1px solid #f2c1c8;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back:hover {
+            color: #8f1730;
+        }
+
+        .success-id {
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 25px 20px;
+                border-radius: 18px;
+            }
+
+            .header h1 {
+                font-size: 23px;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="header">
+
+            <img
+                src="assets/logo-kpu.png"
+                alt="Logo KPU"
+                class="logo"
+            >
+
+            <h1>Presensi Kegiatan</h1>
+
+            <p>
+                <span class="event-title">
+                    Bedah Buku KPU Kabupaten Wakatobi
+                </span>
+                <br>
+                Silakan lengkapi data kehadiran Anda.
+            </p>
+
+        </div>
+
+
+        <form id="presensiForm">
+
+            <div class="form-group">
+                <label for="nama">
+                    Nama Lengka <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="nama"
+                    name="nama"
+                    placeholder="Masukkan nama lengkap (Contoh : La Ode Candra)"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">
+                    Email (Untuk Kebutuhan Sertifikat) <span class="required">*</span>
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="contoh@email.com (pastikan emailnya benar)"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="asal">
+                    Asal/Instansi/Lembaga/Satker <span class="required">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="asal"
+                    name="asal"
+                    placeholder="Contoh: KPU Kabupaten Wakatobi"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="whatsapp">
+                    Nomor WhatsApp <span class="required">*</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="whatsapp"
+                    name="whatsapp"
+                    placeholder="08xxxxxxxxxx"
+                    required
+                >
+            </div>
+
+
+            <div class="form-group">
+                <label for="kesan">
+                    Kesan / Pesan
+                </label>
+
+                <textarea
+                    id="kesan"
+                    name="kesan"
+                    placeholder="Tuliskan kesan atau pesan Anda..."
+                ></textarea>
+            </div>
+
+
+            <button
+                type="submit"
+                class="button"
+                id="submitButton"
+            >
+                Kirim Presensi
+            </button>
+
+        </form>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <a
+            href="index.html"
+            class="back"
+        >
+            ← Kembali ke halaman utama
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // =====================================================
+    // URL GOOGLE APPS SCRIPT WEB APP
+    // =====================================================
+
+    const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbxZnTqsWf9mbKQZK_lN6LC41jPKJ-_vW852SHDplB-HTUkrNhwGz4h79wzevr5iAgaHwA/exec";
+
+
+    // =====================================================
+    // FORM
+    // =====================================================
+
+    const form =
+        document.getElementById("presensiForm");
+
+    const submitButton =
+        document.getElementById("submitButton");
+
+    const message =
+        document.getElementById("message");
+
+
+    // =====================================================
+    // SUBMIT
+    // =====================================================
+
+    form.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        // ==============================
+        // AMBIL DATA
+        // ==============================
+
+        const data = {
+
+            nama:
+                document.getElementById("nama").value.trim(),
+
+            email:
+                document.getElementById("email").value.trim(),
+
+            asal:
+                document.getElementById("asal").value.trim(),
+
+            whatsapp:
+                document.getElementById("whatsapp").value.trim(),
+
+            kesan:
+                document.getElementById("kesan").value.trim()
+
+        };
+
+
+        // ==============================
+        // VALIDASI
+        // ==============================
+
+        if (!data.nama ||
+            !data.email ||
+            !data.asal ||
+            !data.whatsapp) {
+
+            tampilkanPesan(
+                "Mohon lengkapi seluruh data yang wajib diisi.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        // ==============================
+        // LOADING
+        // ==============================
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Mengirim presensi...";
+
+
+        message.style.display = "none";
+
+
+        try {
+
+            // ==============================
+            // KIRIM KE APPS SCRIPT
+            // ==============================
+
+            const response = await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
+                    },
+
+                    body: JSON.stringify(data)
+                }
+            );
+
+
+            const result =
+                await response.json();
+
+
+            // ==============================
+            // HASIL
+            // ==============================
+
+            if (result.success) {
+
+                tampilkanPesan(
+                    `
+                    <strong>Presensi berhasil!</strong>
+                    <div class="success-id">
+                        ID Presensi: ${result.data.id}
+                    </div>
+                    <div style="margin-top:8px;">
+                        Terima kasih, ${result.data.nama}.
+                    </div>
+                    `,
+                    "success"
+                );
+
+                form.reset();
+
+            } else {
+
+                tampilkanPesan(
+                    result.message ||
+                    "Presensi gagal dikirim.",
+                    "error"
+                );
+            }
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            tampilkanPesan(
+                "Tidak dapat terhubung ke server presensi. Silakan coba lagi.",
+                "error"
+            );
+
+        } finally {
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Kirim Presensi";
+        }
+
+    });
+
+
+    // =====================================================
+    // TAMPILKAN PESAN
+    // =====================================================
+
+    function tampilkanPesan(teks, tipe) {
+
+        message.innerHTML = teks;
+
+        message.className =
+            "message " + tipe;
+
+        message.style.display = "block";
+
+        message.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+    }
+
+</script>
+
+</body>
+</html>
