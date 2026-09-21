@@ -1,10 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Bedah Buku | KPU Kabupaten Wakatobi</title>
@@ -17,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <style>
@@ -28,50 +27,151 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --kpu-red: #b5122b;
+            --kpu-dark: #68091d;
+            --kpu-deep: #420713;
+            --kpu-light: #f8e7eb;
+            --white: #ffffff;
+            --text: #292929;
+        }
+
         body {
-
             font-family: 'Inter', sans-serif;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #5b071b,
-                    #7b1028,
-                    #981b36
-                );
 
             min-height: 100vh;
 
-            color: #333;
+            color: var(--text);
 
+            background:
+                radial-gradient(
+                    circle at 15% 10%,
+                    rgba(255,255,255,0.12),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(255,255,255,0.08),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #420713 0%,
+                    #68091d 45%,
+                    #a70f2d 100%
+                );
+
+            overflow-x: hidden;
         }
 
 
         /* =========================================
-           MAIN CONTAINER
+           DECORATIVE BACKGROUND
         ========================================= */
 
-        .page {
+        body::before {
+            content: "";
 
-            width: 100%;
+            position: fixed;
 
-            min-height: 100vh;
+            width: 500px;
+            height: 500px;
 
-            display: flex;
+            border-radius: 50%;
 
-            justify-content: center;
+            background:
+                rgba(255,255,255,0.035);
 
-            padding: 40px 20px;
+            top: -220px;
+            right: -180px;
 
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 350px;
+            height: 350px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            bottom: -180px;
+            left: -120px;
+
+            pointer-events: none;
         }
 
 
-        .container {
+        /* =========================================
+           PAGE
+        ========================================= */
 
+        .page {
             width: 100%;
+            min-height: 100vh;
 
-            max-width: 900px;
+            display: flex;
+            justify-content: center;
 
+            padding:
+                35px 20px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           TOP BAR
+        ========================================= */
+
+        .topbar {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            color: rgba(255,255,255,0.8);
+
+            font-size: 11px;
+
+            margin-bottom: 20px;
+
+            padding: 0 5px;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+
+            background: #7cffae;
+
+            box-shadow:
+                0 0 12px rgba(124,255,174,0.8);
+        }
+
+        .topbar-right {
+            opacity: 0.75;
         }
 
 
@@ -80,202 +180,410 @@
         ========================================= */
 
         .header {
-
             text-align: center;
-
             color: white;
 
-            margin-bottom: 35px;
-
+            margin-bottom: 30px;
         }
 
+        .logo-wrapper {
+            position: relative;
+
+            width: 110px;
+            height: 110px;
+
+            margin: 0 auto 18px;
+        }
 
         .logo {
+            width: 110px;
+            height: 110px;
 
-            width: 105px;
-
-            height: 105px;
-
-            margin: 0 auto 20px;
-
-            background: white;
+            background: rgba(255,255,255,0.97);
 
             border-radius: 50%;
 
             padding: 12px;
 
             display: flex;
-
             align-items: center;
-
             justify-content: center;
 
             box-shadow:
-                0 10px 30px rgba(0,0,0,0.20);
+                0 15px 40px rgba(0,0,0,0.3);
 
+            position: relative;
+            z-index: 2;
         }
 
-
         .logo img {
-
             width: 100%;
-
             height: 100%;
 
             object-fit: contain;
-
         }
 
+        .logo-ring {
+            position: absolute;
+
+            inset: -8px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.35);
+
+            animation: rotate 18s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         .header h1 {
+            font-size: clamp(30px, 5vw, 46px);
 
-            font-size: 38px;
+            font-weight: 900;
 
-            font-weight: 800;
+            letter-spacing: 2px;
 
-            letter-spacing: 1px;
+            margin-bottom: 7px;
 
-            margin-bottom: 8px;
-
+            text-shadow:
+                0 5px 20px rgba(0,0,0,0.2);
         }
 
-
         .header .subtitle {
+            font-size: 15px;
 
-            font-size: 16px;
+            color: rgba(255,255,255,0.82);
 
-            opacity: 0.9;
-
+            letter-spacing: 0.5px;
         }
 
 
         /* =========================================
-           EVENT CARD
+           MAIN CARD
         ========================================= */
 
         .event-card {
+            position: relative;
 
-            background: rgba(255,255,255,0.97);
+            overflow: hidden;
 
-            border-radius: 25px;
+            background:
+                rgba(255,255,255,0.97);
 
-            padding: 35px;
+            border-radius: 28px;
+
+            padding: 38px 35px 32px;
 
             text-align: center;
 
             box-shadow:
-                0 20px 50px rgba(0,0,0,0.20);
+                0 25px 70px rgba(0,0,0,0.25);
 
-            margin-bottom: 25px;
-
+            margin-bottom: 22px;
         }
 
+        .event-card::before {
+            content: "";
 
-        .event-label {
+            position: absolute;
 
-            display: inline-block;
+            top: 0;
+            left: 0;
 
-            background: #f6e7eb;
+            width: 100%;
+            height: 5px;
 
-            color: #7b1028;
-
-            padding: 7px 15px;
-
-            border-radius: 50px;
-
-            font-size: 12px;
-
-            font-weight: 700;
-
-            letter-spacing: 1px;
-
-            margin-bottom: 15px;
-
+            background:
+                linear-gradient(
+                    90deg,
+                    #8e0b25,
+                    #d42145,
+                    #8e0b25
+                );
         }
 
+        .event-card::after {
+            content: "✓";
 
-        .event-card h2 {
+            position: absolute;
 
-            color: #6e0b22;
+            font-size: 180px;
 
-            font-size: 25px;
+            font-weight: 900;
 
-            margin-bottom: 15px;
+            color: rgba(181,18,43,0.035);
 
-        }
+            right: -25px;
+            bottom: -70px;
 
-
-        .event-description {
-
-            color: #666;
-
-            line-height: 1.7;
-
-            font-size: 14px;
-
-            margin-bottom: 25px;
-
+            transform: rotate(-12deg);
         }
 
 
         /* =========================================
-           EVENT INFORMATION
+           BADGE
+        ========================================= */
+
+        .event-label {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            background:
+                #f9e8ec;
+
+            color:
+                var(--kpu-red);
+
+            padding:
+                8px 16px;
+
+            border-radius:
+                50px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1.3px;
+
+            margin-bottom:
+                15px;
+        }
+
+        .event-label::before {
+            content: "";
+
+            width: 7px;
+            height: 7px;
+
+            background:
+                var(--kpu-red);
+
+            border-radius: 50%;
+        }
+
+
+        /* =========================================
+           TITLE
+        ========================================= */
+
+        .event-card h2 {
+            color:
+                var(--kpu-dark);
+
+            font-size:
+                clamp(22px, 4vw, 30px);
+
+            font-weight:
+                800;
+
+            margin-bottom:
+                12px;
+        }
+
+        .event-description {
+            color:
+                #707070;
+
+            line-height:
+                1.7;
+
+            font-size:
+                14px;
+
+            max-width:
+                700px;
+
+            margin:
+                0 auto 25px;
+        }
+
+
+        /* =========================================
+           COUNTDOWN
+        ========================================= */
+
+        .countdown-wrapper {
+            margin:
+                25px auto 28px;
+
+            max-width:
+                680px;
+        }
+
+        .countdown-title {
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                1.5px;
+
+            color:
+                #8a8a8a;
+
+            margin-bottom:
+                12px;
+        }
+
+        .countdown {
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                10px;
+        }
+
+        .count-box {
+            background:
+                linear-gradient(
+                    145deg,
+                    #5b071b,
+                    #94112e
+                );
+
+            color:
+                white;
+
+            border-radius:
+                16px;
+
+            padding:
+                15px 8px;
+
+            box-shadow:
+                0 10px 25px rgba(105,10,31,0.2);
+        }
+
+        .count-number {
+            display:
+                block;
+
+            font-size:
+                clamp(24px, 5vw, 34px);
+
+            font-weight:
+                900;
+
+            line-height:
+                1;
+        }
+
+        .count-label {
+            display:
+                block;
+
+            margin-top:
+                7px;
+
+            font-size:
+                9px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                1px;
+
+            opacity:
+                0.75;
+        }
+
+        .countdown-date {
+            margin-top:
+                12px;
+
+            font-size:
+                11px;
+
+            color:
+                #999;
+        }
+
+
+        /* =========================================
+           EVENT INFO
         ========================================= */
 
         .event-info {
+            display:
+                grid;
 
-            display: flex;
+            grid-template-columns:
+                repeat(3, 1fr);
 
-            justify-content: center;
+            gap:
+                12px;
 
-            gap: 15px;
+            max-width:
+                700px;
 
-            flex-wrap: wrap;
-
+            margin:
+                0 auto;
         }
-
 
         .info-item {
+            background:
+                #fafafa;
 
-            background: #fafafa;
+            border:
+                1px solid #eeeeee;
 
-            border: 1px solid #eee;
+            border-radius:
+                14px;
 
-            border-radius: 12px;
-
-            padding: 12px 18px;
-
-            min-width: 150px;
-
+            padding:
+                15px 10px;
         }
-
 
         .info-item .icon {
+            font-size:
+                21px;
 
-            font-size: 20px;
-
-            margin-bottom: 5px;
-
+            margin-bottom:
+                6px;
         }
-
 
         .info-item strong {
+            display:
+                block;
 
-            display: block;
+            font-size:
+                11px;
 
-            font-size: 13px;
+            color:
+                #555;
 
-            color: #555;
-
+            margin-bottom:
+                4px;
         }
 
-
         .info-item span {
+            font-size:
+                10px;
 
-            font-size: 12px;
-
-            color: #888;
-
+            color:
+                #999;
         }
 
 
@@ -284,97 +592,161 @@
         ========================================= */
 
         .menu {
-
-            display: grid;
+            display:
+                grid;
 
             grid-template-columns:
                 repeat(2, 1fr);
 
-            gap: 18px;
-
+            gap:
+                15px;
         }
-
 
         .menu-item {
+            position:
+                relative;
 
-            background: rgba(255,255,255,0.97);
+            overflow:
+                hidden;
 
-            border-radius: 20px;
+            background:
+                rgba(255,255,255,0.97);
 
-            padding: 25px;
+            border-radius:
+                19px;
 
-            text-decoration: none;
+            padding:
+                22px;
 
-            color: #333;
+            text-decoration:
+                none;
 
-            display: flex;
+            color:
+                #333;
 
-            align-items: center;
+            display:
+                flex;
 
-            gap: 18px;
+            align-items:
+                center;
+
+            gap:
+                16px;
 
             box-shadow:
-                0 10px 30px rgba(0,0,0,0.15);
+                0 12px 30px rgba(0,0,0,0.14);
 
             transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-
+                all 0.25s ease;
         }
 
+        .menu-item::after {
+            content:
+                "→";
+
+            position:
+                absolute;
+
+            right:
+                20px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                #bbb;
+
+            font-size:
+                20px;
+
+            transition:
+                0.25s ease;
+        }
 
         .menu-item:hover {
-
-            transform: translateY(-5px);
+            transform:
+                translateY(-5px);
 
             box-shadow:
-                0 15px 35px rgba(0,0,0,0.22);
-
+                0 18px 38px rgba(0,0,0,0.2);
         }
 
+        .menu-item:hover::after {
+            right:
+                15px;
+
+            color:
+                var(--kpu-red);
+        }
+
+
+        /* =========================================
+           MENU ICON
+        ========================================= */
 
         .menu-icon {
+            width:
+                58px;
 
-            width: 60px;
+            height:
+                58px;
 
-            height: 60px;
+            min-width:
+                58px;
 
-            min-width: 60px;
+            border-radius:
+                16px;
 
-            border-radius: 16px;
+            background:
+                #f8e8ec;
 
-            background: #f7e8ec;
+            display:
+                flex;
 
-            display: flex;
+            align-items:
+                center;
 
-            align-items: center;
+            justify-content:
+                center;
 
-            justify-content: center;
+            font-size:
+                26px;
 
-            font-size: 28px;
-
+            box-shadow:
+                inset 0 0 0 1px rgba(181,18,43,0.04);
         }
 
+        .menu-text {
+            padding-right:
+                20px;
+        }
 
         .menu-text h3 {
+            color:
+                var(--kpu-dark);
 
-            color: #6e0b22;
+            font-size:
+                15px;
 
-            font-size: 16px;
+            margin-bottom:
+                5px;
 
-            margin-bottom: 5px;
-
+            font-weight:
+                800;
         }
 
-
         .menu-text p {
+            color:
+                #7b7b7b;
 
-            color: #777;
+            font-size:
+                11px;
 
-            font-size: 12px;
-
-            line-height: 1.5;
-
+            line-height:
+                1.55;
         }
 
 
@@ -383,41 +755,76 @@
         ========================================= */
 
         .zoom {
-
-            grid-column: span 2;
+            grid-column:
+                span 2;
 
             background:
                 linear-gradient(
                     135deg,
-                    #7b1028,
-                    #9c1c3a
+                    #6c091f 0%,
+                    #a81334 100%
                 );
 
-            color: white;
+            color:
+                white;
 
+            padding:
+                25px;
         }
 
+        .zoom::before {
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                200px;
+
+            height:
+                200px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            right:
+                -80px;
+
+            top:
+                -80px;
+        }
+
+        .zoom::after {
+            content:
+                "→";
+
+            color:
+                white;
+        }
 
         .zoom .menu-icon {
+            background:
+                rgba(255,255,255,0.13);
 
-            background: rgba(255,255,255,0.15);
-
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,0.08);
         }
-
 
         .zoom .menu-text h3 {
+            color:
+                white;
 
-            color: white;
-
-            font-size: 18px;
-
+            font-size:
+                17px;
         }
 
-
         .zoom .menu-text p {
-
-            color: rgba(255,255,255,0.85);
-
+            color:
+                rgba(255,255,255,0.8);
         }
 
 
@@ -426,17 +833,28 @@
         ========================================= */
 
         footer {
+            text-align:
+                center;
 
-            text-align: center;
+            color:
+                rgba(255,255,255,0.68);
 
-            color: rgba(255,255,255,0.75);
+            font-size:
+                10px;
 
-            font-size: 12px;
+            padding:
+                28px 10px 10px;
 
-            padding: 30px 10px 10px;
+            line-height:
+                1.7;
+        }
 
-            line-height: 1.7;
+        footer strong {
+            color:
+                white;
 
+            font-size:
+                11px;
         }
 
 
@@ -447,74 +865,141 @@
         @media (max-width: 650px) {
 
             .page {
-
                 padding:
-                    30px 15px;
-
+                    25px 13px 15px;
             }
 
-
-            .header h1 {
-
-                font-size: 28px;
-
+            .topbar {
+                font-size:
+                    9px;
             }
 
-
-            .header .subtitle {
-
-                font-size: 14px;
-
+            .header {
+                margin-bottom:
+                    22px;
             }
 
+            .logo,
+            .logo-wrapper {
+                width:
+                    88px;
+
+                height:
+                    88px;
+            }
 
             .logo {
-
-                width: 90px;
-
-                height: 90px;
-
+                padding:
+                    10px;
             }
 
+            .header h1 {
+                font-size:
+                    28px;
+
+                letter-spacing:
+                    1px;
+            }
+
+            .header .subtitle {
+                font-size:
+                    12px;
+            }
 
             .event-card {
+                padding:
+                    30px 17px 25px;
 
-                padding: 25px 18px;
-
-                border-radius: 20px;
-
+                border-radius:
+                    21px;
             }
-
 
             .event-card h2 {
-
-                font-size: 21px;
-
+                font-size:
+                    21px;
             }
 
+            .event-description {
+                font-size:
+                    12px;
+            }
+
+            .countdown {
+                gap:
+                    6px;
+            }
+
+            .count-box {
+                padding:
+                    12px 5px;
+
+                border-radius:
+                    12px;
+            }
+
+            .count-number {
+                font-size:
+                    23px;
+            }
+
+            .count-label {
+                font-size:
+                    7px;
+            }
+
+            .event-info {
+                grid-template-columns:
+                    1fr;
+            }
+
+            .info-item {
+                display:
+                    flex;
+
+                align-items:
+                    center;
+
+                text-align:
+                    left;
+
+                gap:
+                    10px;
+            }
+
+            .info-item .icon {
+                margin:
+                    0;
+
+                font-size:
+                    19px;
+            }
 
             .menu {
-
-                grid-template-columns: 1fr;
-
+                grid-template-columns:
+                    1fr;
             }
-
 
             .zoom {
-
-                grid-column: span 1;
-
+                grid-column:
+                    span 1;
             }
-
 
             .menu-item {
-
-                padding: 20px;
-
+                padding:
+                    18px;
             }
 
-        }
+            .menu-icon {
+                width:
+                    52px;
 
+                height:
+                    52px;
+
+                min-width:
+                    52px;
+            }
+        }
 
     </style>
 
@@ -523,10 +1008,32 @@
 
 <body>
 
-
 <div class="page">
 
 <div class="container">
+
+
+    <!-- =====================================
+         TOP BAR
+    ====================================== -->
+
+    <div class="topbar">
+
+        <div class="topbar-left">
+
+            <span class="status-dot"></span>
+
+            <span>
+                PORTAL RESMI KEGIATAN
+            </span>
+
+        </div>
+
+        <div class="topbar-right">
+            KPU KABUPATEN WAKATOBI
+        </div>
+
+    </div>
 
 
     <!-- =====================================
@@ -535,52 +1042,46 @@
 
     <header class="header">
 
+        <div class="logo-wrapper">
 
-        <div class="logo">
+            <div class="logo-ring"></div>
 
-            <img
-                src="assets/logo-kpu.png"
-                alt="Logo KPU">
+            <div class="logo">
+
+                <img
+                    src="assets/logo-kpu.png"
+                    alt="Logo KPU Kabupaten Wakatobi">
+
+            </div>
 
         </div>
 
 
         <h1>
-
             BEDAH BUKU
-
         </h1>
 
-
         <p class="subtitle">
-
             KPU Kabupaten Wakatobi
-
         </p>
-
 
     </header>
 
 
-
     <!-- =====================================
-         EVENT INFORMATION
+         EVENT CARD
     ====================================== -->
 
     <section class="event-card">
 
 
         <span class="event-label">
-
             INFORMASI KEGIATAN
-
         </span>
 
 
         <h2>
-
             Portal Kegiatan Bedah Buku
-
         </h2>
 
 
@@ -595,85 +1096,160 @@
         </p>
 
 
+        <!-- COUNTDOWN -->
+
+        <div class="countdown-wrapper">
+
+            <div class="countdown-title">
+                KEGIATAN AKAN DIMULAI DALAM
+            </div>
+
+
+            <div class="countdown" id="countdown">
+
+                <div class="count-box">
+
+                    <span
+                        class="count-number"
+                        id="days">
+                        00
+                    </span>
+
+                    <span class="count-label">
+                        Hari
+                    </span>
+
+                </div>
+
+
+                <div class="count-box">
+
+                    <span
+                        class="count-number"
+                        id="hours">
+                        00
+                    </span>
+
+                    <span class="count-label">
+                        Jam
+                    </span>
+
+                </div>
+
+
+                <div class="count-box">
+
+                    <span
+                        class="count-number"
+                        id="minutes">
+                        00
+                    </span>
+
+                    <span class="count-label">
+                        Menit
+                    </span>
+
+                </div>
+
+
+                <div class="count-box">
+
+                    <span
+                        class="count-number"
+                        id="seconds">
+                        00
+                    </span>
+
+                    <span class="count-label">
+                        Detik
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="countdown-date">
+
+                Jum'at, 25 September 2026
+                · 14.45 WITA
+
+            </div>
+
+        </div>
+
+
+        <!-- EVENT INFO -->
+
         <div class="event-info">
 
 
             <div class="info-item">
 
                 <div class="icon">
-
                     📅
+                </div>
+
+                <div>
+
+                    <strong>
+                        Hari/Tanggal
+                    </strong>
+
+                    <span>
+                        Jum'at, 25 September 2026
+                    </span>
 
                 </div>
 
-                <strong>
-
-                    Hari/Tanggal
-
-                </strong>
-
-                <span>
-
-                    Jum'at, 25 September 2026
-
-                </span>
-
             </div>
-
 
 
             <div class="info-item">
 
                 <div class="icon">
-
                     🕐
+                </div>
+
+                <div>
+
+                    <strong>
+                        Waktu
+                    </strong>
+
+                    <span>
+                        14.45 WITA
+                    </span>
 
                 </div>
 
-                <strong>
-
-                    Waktu
-
-                </strong>
-
-                <span>
-
-                    14.45 WITA
-
-                </span>
-
             </div>
-
 
 
             <div class="info-item">
 
                 <div class="icon">
-
                     📍
-
                 </div>
 
-                <strong>
+                <div>
 
-                    Pelaksanaan
+                    <strong>
+                        Pelaksanaan
+                    </strong>
 
-                </strong>
+                    <span>
+                        Daring / Zoom
+                    </span>
 
-                <span>
-
-                    Daring / Zoom
-
-                </span>
+                </div>
 
             </div>
 
 
         </div>
 
-
     </section>
-
 
 
     <!-- =====================================
@@ -682,6 +1258,7 @@
 
     <section class="menu">
 
+
         <!-- ZOOM -->
 
         <a
@@ -689,27 +1266,29 @@
             class="menu-item zoom"
             target="_blank"
             rel="noopener noreferrer">
-        
+
+
             <div class="menu-icon">
                 🎥
             </div>
-        
+
+
             <div class="menu-text">
-        
+
                 <h3>
                     Gabung Via Zoom
                 </h3>
-        
+
                 <p>
                     Klik di sini untuk bergabung
                     ke dalam kegiatan Bedah Buku
                     melalui Zoom Meeting.
                 </p>
-        
-            </div>
-        
-        </a>
 
+            </div>
+
+
+        </a>
 
 
         <!-- VIRTUAL BACKGROUND -->
@@ -719,37 +1298,28 @@
             class="menu-item"
             target="_blank"
             rel="noopener noreferrer">
-            
 
 
             <div class="menu-icon">
-
                 🖥️
-
             </div>
 
 
             <div class="menu-text">
 
                 <h3>
-
                     Virtual Background
-
                 </h3>
 
-
                 <p>
-
                     Download atau akses
                     virtual background kegiatan.
-
                 </p>
 
             </div>
 
 
         </a>
-
 
 
         <!-- MATERI -->
@@ -759,37 +1329,28 @@
             class="menu-item"
             target="_blank"
             rel="noopener noreferrer">
-            
 
 
             <div class="menu-icon">
-
                 📚
-
             </div>
 
 
             <div class="menu-text">
 
                 <h3>
-
                     Materi Bedah Buku
-
                 </h3>
 
-
                 <p>
-
                     Akses materi dan bahan
                     kegiatan Bedah Buku.
-
                 </p>
 
             </div>
 
 
         </a>
-
 
 
         <!-- PRESENSI -->
@@ -802,33 +1363,25 @@
 
 
             <div class="menu-icon">
-
                 📝
-
             </div>
 
 
             <div class="menu-text">
 
                 <h3>
-
                     Presensi
-
                 </h3>
 
-
                 <p>
-
                     Silakan melakukan presensi
                     kehadiran kegiatan.
-
                 </p>
 
             </div>
 
 
         </a>
-
 
 
         <!-- SERTIFIKAT -->
@@ -841,26 +1394,19 @@
 
 
             <div class="menu-icon">
-
                 🎓
-
             </div>
 
 
             <div class="menu-text">
 
                 <h3>
-
                     Sertifikat
-
                 </h3>
 
-
                 <p>
-
                     Akses halaman sertifikat
                     kegiatan.
-
                 </p>
 
             </div>
@@ -872,7 +1418,6 @@
     </section>
 
 
-
     <!-- =====================================
          FOOTER
     ====================================== -->
@@ -880,9 +1425,7 @@
     <footer>
 
         <strong>
-
             KPU KABUPATEN WAKATOBI
-
         </strong>
 
         <br>
@@ -901,6 +1444,127 @@
 </div>
 
 
+<!-- =========================================
+     COUNTDOWN JAVASCRIPT
+========================================= -->
+
+<script>
+
+    /*
+       Target kegiatan:
+       25 September 2026
+       14.45 WITA
+
+       Asia/Makassar = UTC+8
+    */
+
+    const targetDate =
+        new Date("2026-09-25T14:45:00+08:00").getTime();
+
+
+    function updateCountdown() {
+
+        const now =
+            new Date().getTime();
+
+        const distance =
+            targetDate - now;
+
+
+        /* Jika waktu kegiatan sudah tiba */
+
+        if (distance <= 0) {
+
+            document.querySelector(".countdown-title")
+                .innerHTML =
+                "🔴 KEGIATAN SEDANG BERLANGSUNG";
+
+            document.getElementById("days")
+                .innerHTML = "00";
+
+            document.getElementById("hours")
+                .innerHTML = "00";
+
+            document.getElementById("minutes")
+                .innerHTML = "00";
+
+            document.getElementById("seconds")
+                .innerHTML = "00";
+
+            return;
+
+        }
+
+
+        const days =
+            Math.floor(
+                distance /
+                (1000 * 60 * 60 * 24)
+            );
+
+
+        const hours =
+            Math.floor(
+                (distance %
+                (1000 * 60 * 60 * 24)) /
+                (1000 * 60 * 60)
+            );
+
+
+        const minutes =
+            Math.floor(
+                (distance %
+                (1000 * 60 * 60)) /
+                (1000 * 60)
+            );
+
+
+        const seconds =
+            Math.floor(
+                (distance %
+                (1000 * 60)) /
+                1000
+            );
+
+
+        document.getElementById("days")
+            .innerHTML =
+            String(days).padStart(2, "0");
+
+
+        document.getElementById("hours")
+            .innerHTML =
+            String(hours).padStart(2, "0");
+
+
+        document.getElementById("minutes")
+            .innerHTML =
+            String(minutes).padStart(2, "0");
+
+
+        document.getElementById("seconds")
+            .innerHTML =
+            String(seconds).padStart(2, "0");
+
+    }
+
+
+    /* Jalankan langsung */
+
+    updateCountdown();
+
+
+    /* Update setiap 1 detik */
+
+    setInterval(
+        updateCountdown,
+        1000
+    );
+
+</script>
+
+
 </body>
 
 </html>
+```
