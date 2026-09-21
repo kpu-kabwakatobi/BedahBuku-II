@@ -175,6 +175,48 @@
             margin-top: 8px;
         }
 
+        .status-presensi {
+            display: none;
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 14px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .status-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .status-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .status-text {
+            font-size: 14px;
+        }
+        
+        .status-belum {
+            background: #fff8e6;
+            color: #856404;
+            border: 1px solid #ffe69c;
+        }
+        
+        .status-buka {
+            background: #eaf8ef;
+            color: #176b38;
+            border: 1px solid #bce8ca;
+        }
+        
+        .status-tutup {
+            background: #fff0f1;
+            color: #a51632;
+            border: 1px solid #f2c1c8;
+        }
+
         @media (max-width: 600px) {
 
             body {
@@ -211,9 +253,9 @@
                 alt="Logo KPU"
                 class="logo"
             >
-
+        
             <h1>Presensi Kegiatan</h1>
-
+        
             <p>
                 <span class="event-title">
                     Bedah Buku KPU Kabupaten Wakatobi
@@ -221,10 +263,17 @@
                 <br>
                 Silakan lengkapi data kehadiran Anda.
             </p>
-
+        
         </div>
-
-
+        
+        
+        <div
+            id="statusPresensi"
+            class="status-presensi"
+        >
+        </div>
+        
+        
         <form id="presensiForm">
 
             <div class="form-group">
@@ -351,6 +400,131 @@
 
     const message =
         document.getElementById("message");
+
+    const statusPresensi =
+    document.getElementById(
+        "statusPresensi"
+    );
+
+    // =====================================================
+    // CEK STATUS PRESENSI
+    // =====================================================
+    
+    async function cekStatusPresensi() {
+    
+        try {
+    
+            const response =
+                await fetch(
+                    SCRIPT_URL +
+                    "?status=presensi"
+                );
+    
+            const result =
+                await response.json();
+    
+    
+            if (
+                !result.success ||
+                !result.data
+            ) {
+    
+                tampilkanStatus(
+                    "error",
+                    "Presensi Tidak Dapat Dibuka",
+                    "Silakan coba kembali beberapa saat lagi."
+                );
+    
+                form.style.display =
+                    "none";
+    
+                return;
+    
+            }
+    
+    
+            const status =
+                result.data.status;
+    
+    
+            // =========================================
+            // BELUM DIBUKA
+            // =========================================
+    
+            if (
+                status === "BELUM_DIBUKA"
+            ) {
+    
+                tampilkanStatus(
+                    "belum",
+                    "Presensi Belum Tersedia",
+                    "Silakan kembali pada saat presensi telah dibuka."
+                );
+    
+                form.style.display =
+                    "none";
+    
+                return;
+            }
+    
+    
+            // =========================================
+            // SEDANG DIBUKA
+            // =========================================
+    
+            if (
+                status === "DIBUKA"
+            ) {
+    
+                tampilkanStatus(
+                    "buka",
+                    "Presensi Dibuka",
+                    "Silakan lengkapi data kehadiran Anda."
+                );
+    
+                form.style.display =
+                    "block";
+    
+                return;
+            }
+    
+    
+            // =========================================
+            // SUDAH DITUTUP
+            // =========================================
+    
+            if (
+                status === "DITUTUP"
+            ) {
+    
+                tampilkanStatus(
+                    "tutup",
+                    "Presensi Telah Ditutup",
+                    "Terima kasih atas partisipasi Anda dalam kegiatan ini."
+                );
+    
+                form.style.display =
+                    "none";
+    
+                return;
+            }
+    
+    
+        } catch (error) {
+    
+            console.error(error);
+    
+            tampilkanStatus(
+                "error",
+                "Tidak Dapat Mengakses Presensi",
+                "Silakan coba kembali beberapa saat lagi."
+            );
+    
+            form.style.display =
+                "none";
+        }
+    
+    }
 
 
     // =====================================================
@@ -511,6 +685,88 @@
             block: "nearest"
         });
     }
+
+    function tampilkanStatus(
+        tipe,
+        judul,
+        teks
+    ) {
+    
+        let icon = "";
+    
+        let className =
+            "status-presensi";
+    
+    
+        if (tipe === "belum") {
+    
+            icon = "🔒";
+    
+            className +=
+                " status-belum";
+    
+        }
+    
+    
+        else if (tipe === "buka") {
+    
+            icon = "✓";
+    
+            className +=
+                " status-buka";
+    
+        }
+    
+    
+        else if (tipe === "tutup") {
+    
+            icon = "🔒";
+    
+            className +=
+                " status-tutup";
+    
+        }
+    
+    
+        else {
+    
+            icon = "⚠️";
+    
+            className +=
+                " status-tutup";
+    
+        }
+    
+    
+        statusPresensi.innerHTML = `
+    
+            <div class="status-icon">
+                ${icon}
+            </div>
+    
+            <div class="status-title">
+                ${judul}
+            </div>
+    
+            <div class="status-text">
+                ${teks}
+            </div>
+    
+        `;
+    
+    
+        statusPresensi.className =
+            className;
+    
+        statusPresensi.style.display =
+            "block";
+    }
+
+    // =====================================================
+    // CEK STATUS SAAT HALAMAN DIBUKA
+    // =====================================================
+
+    cekStatusPresensi();
 
 </script>
 
