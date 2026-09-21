@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sertifikat - Bedah Buku KPU Wakatobi</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(
+        135deg,
+        #f8f9fa 0%,
+        #f1e8e8 100%
+      );
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    .navbar {
+      background: #7b1113;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff !important;
+    }
+
+    .main-container {
+      min-height: calc(100vh - 56px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 15px;
+    }
+
+    .certificate-card {
+      width: 100%;
+      max-width: 650px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .logo {
+      width: 75px;
+      margin-bottom: 15px;
+    }
+
+    .title {
+      color: #7b1113;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 13px 15px;
+    }
+
+    .btn-search {
+      background: #7b1113;
+      border: none;
+      border-radius: 10px;
+      padding: 13px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .btn-search:hover {
+      background: #5f0d0f;
+      color: #fff;
+    }
+
+    #result {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .result-card {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 25px;
+      border-left: 5px solid #7b1113;
+    }
+
+    .participant-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #7b1113;
+    }
+
+    .info-label {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 3px;
+    }
+
+    .info-value {
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .btn-certificate {
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-weight: 600;
+    }
+
+    .btn-view {
+      background: #7b1113;
+      color: #fff;
+    }
+
+    .btn-view:hover {
+      background: #5f0d0f;
+      color: #fff;
+    }
+
+    .btn-download {
+      border: 1px solid #7b1113;
+      color: #7b1113;
+      background: #fff;
+    }
+
+    .btn-download:hover {
+      background: #7b1113;
+      color: #fff;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .error-message {
+      display: none;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark">
+  <div class="container">
+
+    <a
+      class="navbar-brand"
+      href="index.html"
+    >
+      <i class="fa-solid fa-certificate me-2"></i>
+      Bedah Buku KPU Wakatobi
+    </a>
+
+  </div>
+</nav>
+
+
+<div class="main-container">
+
+  <div class="certificate-card">
+
+    <!-- HEADER -->
+
+    <div class="text-center">
+
+      <img
+        src="assets/logo-kpu.png"
+        alt="Logo KPU"
+        class="logo"
+      >
+
+      <h2 class="title">
+        Sertifikat Peserta
+      </h2>
+
+      <p class="subtitle">
+        Bedah Buku KPU Kabupaten Wakatobi
+      </p>
+
+    </div>
+
+
+    <!-- FORM PENCARIAN -->
+
+    <form id="certificateForm">
+
+      <div class="mb-3">
+
+        <label
+          for="email"
+          class="form-label fw-semibold"
+        >
+          Email yang digunakan saat presensi
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          placeholder="Masukkan email Anda"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="btn btn-search w-100"
+        id="searchButton"
+      >
+
+        <i class="fa-solid fa-magnifying-glass me-2"></i>
+
+        Cari Sertifikat
+
+      </button>
+
+    </form>
+
+
+    <!-- LOADING -->
+
+    <div
+      id="loading"
+      class="loading"
+    >
+
+      <div
+        class="spinner-border text-danger"
+        role="status"
+      ></div>
+
+      <div class="mt-2">
+        Mencari sertifikat...
+      </div>
+
+    </div>
+
+
+    <!-- ERROR -->
+
+    <div
+      id="errorMessage"
+      class="alert alert-danger error-message"
+    ></div>
+
+
+    <!-- HASIL -->
+
+    <div id="result">
+
+      <div class="result-card">
+
+        <div class="mb-3">
+
+          <div class="info-label">
+            Nama Peserta
+          </div>
+
+          <div
+            id="nama"
+            class="participant-name"
+          ></div>
+
+        </div>
+
+
+        <div class="mb-3">
+
+          <div class="info-label">
+            Asal / Instansi
+          </div>
+
+          <div
+            id="asal"
+            class="info-value"
+          ></div>
+
+        </div>
+
+
+        <div class="mb-3">
+
+          <div class="info-label">
+            Status Kehadiran
+          </div>
+
+          <div
+            id="status"
+            class="info-value"
+          ></div>
+
+        </div>
+
+
+        <div class="d-flex gap-2 flex-wrap">
+
+          <a
+            id="viewCertificate"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-certificate btn-view"
+          >
+            <i class="fa-solid fa-eye me-2"></i>
+            Lihat Sertifikat
+          </a>
+
+
+          <a
+            id="downloadCertificate"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-certificate btn-download"
+          >
+            <i class="fa-solid fa-download me-2"></i>
+            Download
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <footer>
+      Komisi Pemilihan Umum Kabupaten Wakatobi
+    </footer>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  /*
+   * URL WEB APP APPS SCRIPT
+   *
+   * Gunakan URL /exec yang sama
+   * dengan presensi.html
+   */
+
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbxZnTqsWf9mbKQZK_lN6LC41jPKJ-_vW852SHDplB-HTUkrNhwGz4h79wzevr5iAgaHwA/exec";
+
+
+  const form =
+    document.getElementById(
+      "certificateForm"
+    );
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+  const errorMessage =
+    document.getElementById(
+      "errorMessage"
+    );
+
+  const searchButton =
+    document.getElementById(
+      "searchButton"
+    );
+
+
+  form.addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      const email =
+        document
+          .getElementById("email")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      // Reset tampilan
+
+      result.style.display =
+        "none";
+
+      errorMessage.style.display =
+        "none";
+
+      loading.style.display =
+        "block";
+
+      searchButton.disabled =
+        true;
+
+
+      try {
+
+        const response =
+          await fetch(
+            SCRIPT_URL +
+            "?email=" +
+            encodeURIComponent(email)
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Server mengembalikan HTTP " +
+            response.status
+          );
+
+        }
+
+
+        const data =
+          await response.json();
+
+
+        if (!data.success) {
+
+          errorMessage.textContent =
+            data.message ||
+            "Sertifikat tidak ditemukan.";
+
+          errorMessage.style.display =
+            "block";
+
+          return;
+        }
+
+
+        const certificate =
+          data.data;
+
+
+        // Tampilkan data peserta
+
+        document
+          .getElementById("nama")
+          .textContent =
+          certificate.nama;
+
+
+        document
+          .getElementById("asal")
+          .textContent =
+          certificate.asal;
+
+
+        document
+          .getElementById("status")
+          .textContent =
+          certificate.status;
+
+
+        // Link sertifikat
+
+        document
+          .getElementById(
+            "viewCertificate"
+          )
+          .href =
+          certificate.linkSertifikat;
+
+
+        document
+          .getElementById(
+            "downloadCertificate"
+          )
+          .href =
+          certificate.linkSertifikat;
+
+
+        // Tampilkan hasil
+
+        result.style.display =
+          "block";
+
+      } catch (error) {
+
+        console.error(error);
+
+        errorMessage.textContent =
+          "Tidak dapat terhubung ke server. Silakan coba kembali.";
+
+        errorMessage.style.display =
+          "block";
+
+      } finally {
+
+        loading.style.display =
+          "none";
+
+        searchButton.disabled =
+          false;
+
+      }
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
