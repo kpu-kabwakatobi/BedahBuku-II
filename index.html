@@ -857,6 +857,47 @@
                 11px;
         }
 
+        /* =========================================
+           BANNER INFORMASI KEGIATAN
+        ========================================= */
+        
+        .info-banner {
+            position: relative;
+            width: 100%;
+            margin-bottom: 22px;
+            border-radius: 22px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+        }
+        
+        .info-banner img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: cover;
+        }
+        
+        .info-banner-caption {
+            padding: 13px 18px;
+            text-align: center;
+            background: rgba(255,255,255,0.97);
+        }
+        
+        .info-banner-caption strong {
+            display: block;
+            color: var(--kpu-dark);
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+        
+        .info-banner-caption span {
+            color: #777;
+            font-size: 11px;
+        }
+
 
         /* =========================================
            MOBILE
@@ -998,6 +1039,27 @@
 
                 min-width:
                     52px;
+            }
+
+            .info-banner {
+                border-radius: 17px;
+                margin-bottom: 18px;
+            }
+            
+            .info-banner img {
+                max-height: 400px;
+            }
+            
+            .info-banner-caption {
+                padding: 11px 14px;
+            }
+            
+            .info-banner-caption strong {
+                font-size: 12px;
+            }
+            
+            .info-banner-caption span {
+                font-size: 10px;
             }
         }
 
@@ -1251,6 +1313,30 @@
 
     </section>
 
+    <!-- =====================================
+     BANNER INFORMASI PELAKSANAAN
+====================================== -->
+
+    <section class="info-banner">
+    
+        <img
+            src="assets/informasi-kegiatan.jpg"
+            alt="Informasi Pelaksanaan Kegiatan Bedah Buku KPU Kabupaten Wakatobi"
+        >
+    
+        <div class="info-banner-caption">
+    
+            <strong>
+                INFORMASI PELAKSANAAN KEGIATAN
+            </strong>
+    
+            <span>
+                Bedah Buku KPU Kabupaten Wakatobi
+            </span>
+    
+        </div>
+    
+    </section>
 
     <!-- =====================================
          MENU
